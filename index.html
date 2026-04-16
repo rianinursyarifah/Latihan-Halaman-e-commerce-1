@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Toko Online Terpercaya - Temukan produk terbaik dengan harga terjangkau">
+    <title>ShopEasy - E-Commerce Store</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome untuk icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        /* ===== RESET & VARIABEL ===== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a1a2e;
+            --accent: #e94560;
+            --accent2: #f5a623;
+            --light: #f8f8f8;
+            --white: #ffffff;
+            --gray: #6b7280;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 24px rgba(0,0,0,0.10);
+            --radius: 16px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--light);
+            color: var(--primary);
+            min-height: 100vh;
+        }
+
+        /* ===== NAVBAR ===== */
+        nav {
+            background: var(--primary);
+            padding: 0 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-logo span { color: var(--accent); }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        .nav-icons {
+            display: flex;
+            gap: 1.2rem;
+            align-items: center;
+        }
+
+        .nav-icons a {
+            color: rgba(255,255,255,0.85);
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .nav-icons a:hover { color: var(--accent); }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent);
+            color: white;
+            font-size: 0.6rem;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        /* ===== HEADER / IDENTITY ===== */
+        header {
+            background: linear-gradient(135deg, var(--primary) 60%, var(--accent) 100%);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        header p { opacity: 0.85; line-height: 1.8; }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            background: linear-gradient(120deg, var(--primary) 55%, #16213e 100%);
+            color: white;
+            padding: 80px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            min-height: 420px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -80px; right: -80px;
+            width: 350px; height: 350px;
+            background: radial-gradient(circle, rgba(233,69,96,0.25) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-text { max-width: 540px; z-index: 1; }
+
+        .hero-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            line-height: 1.15;
+            margin-bottom: 1.1rem;
+        }
+
+        .hero-text h1 span { color: var(--accent); }
+
+        .hero-text p {
+            color: rgba(255,255,255,0.75);
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(233,69,96,0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            padding: 0.8rem 2rem;
+            border: 2px solid rgba(255,255,255,0.5);
+            border-radius: 50px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: border-color 0.2s, background 0.2s;
+            display: inline-block;
+        }
+
+        .btn-outline:hover {
+            border-color: white;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .hero-badge {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 50px;
+            padding: 0.4rem 1rem;
+            font-size: 0.82rem;
+            color: var(--accent2);
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .hero-visual {
+            font-size: 8rem;
+            z-index: 1;
+            filter: drop-shadow(0 8px 32px rgba(233,69,96,0.3));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-16px); }
+        }
+
+        /* ===== BANNER PROMO ===== */
+        .promo-banner {
+            background: var(--accent2);
+            color: var(--primary);
+            text-align: center;
+            padding: 0.75rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== SECTION TITLE ===== */
+        .section-title {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 0.4rem;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            font-size: 0.97rem;
+        }
+
+        .section-title .title-line {
+            width: 50px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+            margin: 0.7rem auto 0;
+        }
+
+        /* ===== KATEGORI ===== */
+        .categories {
+            padding: 3.5rem 5%;
+            background: white;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .category-card {
+            background: var(--light);
+            border-radius: var(--radius);
+            padding: 1.5rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+            text-decoration: none;
+            color: var(--primary);
+            border: 2px solid transparent;
+        }
+
+        .category-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+            border-color: var(--accent);
+            background: white;
+        }
+
+        .category-card .cat-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .category-card span {
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+
+        /* ===== PRODUK ===== */
+        .featured, .new-arrivals {
+            padding: 3.5rem 5%;
+        }
+
+        .featured { background: var(--light); }
+        .new-arrivals { background: white; }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.25s, box-shadow 0.25s;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 36px rgba(0,0,0,0.14);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: var(--accent);
+            color: white;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 0.25rem 0.6rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .product-badge.new { background: #10b981; }
+
+        .wishlist-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            color: var(--gray);
+            font-size: 0.9rem;
+            transition: color 0.2s, transform 0.2s;
+        }
+
+        .wishlist-btn:hover { color: var(--accent); transform: scale(1.1); }
+
+        .product-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #e0e7ff 0%, #f0fdf4 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .product-img-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea22 0%, #764ba222 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .product-info {
+            padding: 1.2rem;
+        }
+
+        .product-info h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: var(--primary);
+        }
+
+        .product-info .desc {
+            font-size: 0.83rem;
+            color: var(--gray);
+            margin-bottom: 0.7rem;
+            line-height: 1.5;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .stars { color: var(--accent2); font-size: 0.82rem; }
+        .rating-count { font-size: 0.78rem; color: var(--gray); }
+
+        .product-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .price {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .price-old {
+            font-size: 0.82rem;
+            color: var(--gray);
+            text-decoration: line-through;
+            margin-left: 0.3rem;
+            font-weight: 400;
+        }
+
+        .add-to-cart {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 0.5rem 1.1rem;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .add-to-cart:hover {
+            background: var(--accent);
+            transform: scale(1.05);
+        }
+
+        /* ===== CART NOTIFICATION ===== */
+        .cart-notif {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            font-size: 0.92rem;
+            font-weight: 500;
+            z-index: 999;
+            display: none;
+            align-items: center;
+            gap: 0.6rem;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .cart-notif i { color: var(--accent2); }
+
+        /* ===== STATS SECTION ===== */
+        .stats {
+            background: var(--primary);
+            color: white;
+            padding: 3rem 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--accent);
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-item p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+
+        /* ===== NEWSLETTER ===== */
+        .newsletter {
+            background: linear-gradient(120deg, var(--accent) 0%, #c0392b 100%);
+            color: white;
+            padding: 3.5rem 5%;
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.9rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .newsletter p {
+            opacity: 0.88;
+            margin-bottom: 1.5rem;
+            font-size: 0.97rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0.8rem;
+            max-width: 460px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            min-width: 220px;
+            padding: 0.85rem 1.3rem;
+            border-radius: 50px;
+            border: none;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .newsletter-form button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 0.85rem 1.8rem;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .newsletter-form button:hover { opacity: 0.85; }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #0f0f1a;
+            color: rgba(255,255,255,0.75);
+            padding: 3rem 5% 1.5rem;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 0.7rem;
+        }
+
+        .footer-brand h3 span { color: var(--accent); }
+
+        .footer-brand p {
+            font-size: 0.87rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .footer-col h4 {
+            color: white;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer-col ul { list-style: none; }
+
+        .footer-col ul li {
+            margin-bottom: 0.6rem;
+        }
+
+        .footer-col ul li a {
+            color: rgba(255,255,255,0.65);
+            text-decoration: none;
+            font-size: 0.87rem;
+            transition: color 0.2s;
+        }
+
+        .footer-col ul li a:hover { color: var(--accent); }
+
+        .footer-col .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 0.8rem;
+            font-size: 0.87rem;
+        }
+
+        .footer-col .contact-item i {
+            color: var(--accent);
+            width: 16px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .social-links a {
+            background: rgba(255,255,255,0.08);
+            color: rgba(255,255,255,0.75);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s, transform 0.2s;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding-top: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom p {
+            font-size: 0.82rem;
+            opacity: 0.6;
+        }
+
+        .footer-bottom .identity {
+            font-size: 0.8rem;
+            opacity: 0.5;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero { flex-direction: column; text-align: center; padding: 50px 5%; }
+            .hero-visual { font-size: 5rem; }
+            .hero-buttons { justify-content: center; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PROMO BANNER -->
+    <div class="promo-banner">
+        🎉 Gratis Ongkir untuk Pembelian di Atas Rp 200.000 — Berlaku Hari Ini Saja!
+    </div>
+
+    <!-- NAVBAR -->
+    <nav>
+        <a href="#" class="nav-logo">Shop<span>Easy</span></a>
+        <ul class="nav-links">
+            <li><a href="#featured">Featured</a></li>
+            <li><a href="#new-arrivals">New Arrivals</a></li>
+            <li><a href="#categories">Kategori</a></li>
+            <li><a href="#contact">Kontak</a></li>
+        </ul>
+        <div class="nav-icons">
+            <a href="#"><i class="fas fa-search"></i></a>
+            <a href="#" style="position:relative">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-badge" id="cartCount">0</span>
+            </a>
+            <a href="#"><i class="fas fa-user"></i></a>
+        </div>
+    </nav>
+
+    <!-- HEADER IDENTITAS -->
+    <header>
+        <p><strong>NAMA:</strong> RIANI NUR SYARIFAH &nbsp;|&nbsp;
+           <strong>NIM:</strong> 209250206 &nbsp;|&nbsp;
+           <strong>KELAS:</strong> ABI8</p>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-text">
+            <div class="hero-badge">🔥 Special Offer</div>
+            <h1>Belanja <span>Lebih Mudah</span>,<br>Hidup Lebih Gaya</h1>
+            <p>Temukan ribuan produk pilihan dengan kualitas terjamin dan harga terbaik. Gratis ongkir, pengiriman cepat, dan jaminan uang kembali.</p>
+            <div class="hero-buttons">
+                <a href="#featured" class="btn-primary">
+                    <i class="fas fa-shopping-bag"></i> Belanja Sekarang
+                </a>
+                <a href="#new-arrivals" class="btn-outline">
+                    Lihat New Arrivals
+                </a>
+            </div>
+        </div>
+        <div class="hero-visual">🛍️</div>
+    </section>
+
+    <!-- KATEGORI -->
+    <section class="categories" id="categories">
+        <div class="section-title">
+            <h2>Kategori Produk</h2>
+            <p>Temukan produk sesuai kebutuhanmu</p>
+            <div class="title-line"></div>
+        </div>
+        <div class="category-grid">
+            <a href="#" class="category-card">
+                <span class="cat-icon">👗</span>
+                <span>Fashion</span>
+            </a>
+            <a href="#" class="category-card">
+                <span class="cat-icon">📱</span>
+                <span>Elektronik</span>
+            </a>
+            <a href="#" class="category-card">
+                <span class="cat-icon">🏠</span>
+                <span>Rumah Tangga</span>
+            </a>
+            <a href="#" class="category-card">
+                <span class="cat-icon">💄</span>
+                <span>Kecantikan</span>
+            </a>
+            <a href="#" class="category-card">
+                <span class="cat-icon">⚽</span>
+                <span>Olahraga</span>
+            </a>
+            <a href="#" class="category-card">
+                <span class="cat-icon">📚</span>
+                <span>Buku</span>
+            </a>
+            <a href="#" class="category-card">
+                <span class="cat-icon">🧸</span>
+                <span>Mainan</span>
+            </a>
+            <a href="#" class="category-card">
+                <span class="cat-icon">🍎</span>
+                <span>Makanan</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- FEATURED PRODUCTS -->
+    <section class="featured" id="featured">
+        <div class="section-title">
+            <h2>Featured Products</h2>
+            <p>Produk unggulan pilihan kami</p>
+            <div class="title-line"></div>
+        </div>
+        <div class="product-grid">
+
+            <div class="product-card">
+                <span class="product-badge">Sale</span>
+                <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="far fa-heart"></i></button>
+                <div class="product-img-placeholder">👟</div>
+                <div class="product-info">
+                    <h3>Sepatu Sneakers Premium</h3>
+                    <p class="desc">Nyaman untuk aktivitas sehari-hari, tersedia berbagai ukuran</p>
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-count">(128)</span>
+                    </div>
+                    <div class="product-footer">
+                        <div>
+                            <span class="price">Rp 350.000</span>
+                            <span class="price-old">Rp 500.000</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart(this, 'Sepatu Sneakers')">
+                            <i class="fas fa-plus"></i> Tambah
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="far fa-heart"></i></button>
+                <div class="product-img-placeholder">📱</div>
+                <div class="product-info">
+                    <h3>Smartwatch Sport Edition</h3>
+                    <p class="desc">Monitor detak jantung, GPS, tahan air hingga 50 meter</p>
+                    <div class="product-rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-count">(84)</span>
+                    </div>
+                    <div class="product-footer">
+                        <div>
+                            <span class="price">Rp 899.000</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart(this, 'Smartwatch')">
+                            <i class="fas fa-plus"></i> Tambah
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <span class="product-badge">Hot</span>
+                <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="far fa-heart"></i></button>
+                <div class="product-img-placeholder">👜</div>
+                <div class="product-info">
+                    <h3>Tas Kulit Wanita Elegan</h3>
+                    <p class="desc">Bahan kulit sintetis premium, desain modern dan stylish</p>
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-count">(256)</span>
+                    </div>
+                    <div class="product-footer">
+                        <div>
+                            <span class="price">Rp 275.000</span>
+                            <span class="price-old">Rp 400.000</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart(this, 'Tas Kulit')">
+                            <i class="fas fa-plus"></i> Tambah
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="far fa-heart"></i></button>
+                <div class="product-img-placeholder">🎧</div>
+                <div class="product-info">
+                    <h3>Headphone Wireless Bass</h3>
+                    <p class="desc">Suara jernih, baterai tahan 30 jam, teknologi noise-cancelling</p>
+                    <div class="product-rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-count">(192)</span>
+                    </div>
+                    <div class="product-footer">
+                        <div>
+                            <span class="price">Rp 450.000</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart(this, 'Headphone')">
+                            <i class="fas fa-plus"></i> Tambah
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <div class="stats">
+        <div class="stat-item">
+            <h3>50K+</h3>
+            <p>Produk Tersedia</p>
+        </div>
+        <div class="stat-item">
+            <h3>120K+</h3>
+            <p>Pelanggan Puas</p>
+        </div>
+        <div class="stat-item">
+            <h3>4.9★</h3>
+            <p>Rating Toko</p>
+        </div>
+        <div class="stat-item">
+            <h3>24/7</h3>
+            <p>Layanan Pelanggan</p>
+        </div>
+    </div>
+
+    <!-- NEW ARRIVALS -->
+    <section class="new-arrivals" id="new-arrivals">
+        <div class="section-title">
+            <h2>New Arrivals</h2>
+            <p>Produk terbaru yang baru saja masuk</p>
+            <div class="title-line"></div>
+        </div>
+        <div class="product-grid">
+
+            <div class="product-card">
+                <span class="product-badge new">New</span>
+                <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="far fa-heart"></i></button>
+                <div class="product-img-placeholder">🌿</div>
+                <div class="product-info">
+                    <h3>Skincare Set Aloe Vera</h3>
+                    <p class="desc">Paket perawatan kulit lengkap, cocok untuk semua jenis kulit</p>
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-count">(47)</span>
+                    </div>
+                    <div class="product-footer">
+                        <div>
+                            <span class="price">Rp 185.000</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart(this, 'Skincare Set')">
+                            <i class="fas fa-plus"></i> Tambah
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <span class="product-badge new">New</span>
+                <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="far fa-heart"></i></button>
+                <div class="product-img-placeholder">🪴</div>
+                <div class="product-info">
+                    <h3>Pot Tanaman Minimalis</h3>
+                    <p class="desc">Desain modern, cocok untuk dekorasi rumah dan meja kerja</p>
+                    <div class="product-rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-count">(33)</span>
+                    </div>
+                    <div class="product-footer">
+                        <div>
+                            <span class="price">Rp 75.000</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart(this, 'Pot Tanaman')">
+                            <i class="fas fa-plus"></i> Tambah
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <span class="product-badge new">New</span>
+                <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="far fa-heart"></i></button>
+                <div class="product-img-placeholder">☕</div>
+                <div class="product-info">
+                    <h3>Tumbler Stainless Premium</h3>
+                    <p class="desc">Tahan panas & dingin hingga 12 jam, bebas BPA, kapasitas 500ml</p>
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-count">(91)</span>
+                    </div>
+                    <div class="product-footer">
+                        <div>
+                            <span class="price">Rp 120.000</span>
+                            <span class="price-old">Rp 160.000</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart(this, 'Tumbler')">
+                            <i class="fas fa-plus"></i> Tambah
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <span class="product-badge new">New</span>
+                <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="far fa-heart"></i></button>
+                <div class="product-img-placeholder">🎒</div>
+                <div class="product-info">
+                    <h3>Tas Ransel Laptop 15"</h3>
+                    <p class="desc">Anti air, banyak kompartemen, ergonomis untuk perjalanan jauh</p>
+                    <div class="product-rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-count">(64)</span>
+                    </div>
+                    <div class="product-footer">
+                        <div>
+                            <span class="price">Rp 320.000</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart(this, 'Tas Ransel')">
+                            <i class="fas fa-plus"></i> Tambah
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section class="newsletter">
+        <h2>📧 Dapatkan Penawaran Eksklusif</h2>
+        <p>Daftar sekarang dan dapatkan diskon 10% untuk pembelian pertamamu!</p>
+        <div class="newsletter-form">
+            <input type="email" placeholder="Masukkan email kamu..." id="emailInput">
+            <button onclick="subscribe()">Daftar Sekarang</button>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <h3>Shop<span>Easy</span></h3>
+                <p>Platform belanja online terpercaya dengan ribuan produk pilihan dan layanan pelanggan terbaik.</p>
+                <div class="social-links">
+                    <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Menu</h4>
+                <ul>
+                    <li><a href="#">Beranda</a></li>
+                    <li><a href="#featured">Produk Unggulan</a></li>
+                    <li><a href="#new-arrivals">New Arrivals</a></li>
+                    <li><a href="#categories">Kategori</a></li>
+                    <li><a href="#">Flash Sale</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Bantuan</h4>
+                <ul>
+                    <li><a href="#">Cara Pemesanan</a></li>
+                    <li><a href="#">Kebijakan Pengembalian</a></li>
+                    <li><a href="#">Syarat & Ketentuan</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Lacak Pesanan</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Kontak Kami</h4>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>info@shopeasy.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+62 123-456-7890</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Jakarta, Indonesia</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Senin–Sabtu, 08.00–20.00</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2024 ShopEasy. All rights reserved.</p>
+            <p class="identity">Nama: Riani Nur Syarifah | NIM: 209250206 | Kelas: ABI8</p>
+        </div>
+    </footer>
+
+    <!-- CART NOTIFICATION -->
+    <div class="cart-notif" id="cartNotif">
+        <i class="fas fa-check-circle"></i>
+        <span id="cartNotifText">Produk ditambahkan ke keranjang!</span>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        let cartCount = 0;
+
+        function addToCart(btn, productName) {
+            cartCount++;
+            document.getElementById('cartCount').textContent = cartCount;
+
+            // Animasi tombol
+            btn.innerHTML = '<i class="fas fa-check"></i> Ditambah!';
+            btn.style.background = '#10b981';
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-plus"></i> Tambah';
+                btn.style.background = '';
+            }, 1500);
+
+            // Notifikasi
+            const notif = document.getElementById('cartNotif');
+            document.getElementById('cartNotifText').textContent = `${productName} ditambahkan ke keranjang!`;
+            notif.style.display = 'flex';
+            clearTimeout(notif._timeout);
+            notif._timeout = setTimeout(() => {
+                notif.style.display = 'none';
+            }, 2500);
+        }
+
+        function toggleWishlist(btn) {
+            const icon = btn.querySelector('i');
+            if (icon.classList.contains('far')) {
+                icon.classList.replace('far', 'fas');
+                btn.style.color = '#e94560';
+            } else {
+                icon.classList.replace('fas', 'far');
+                btn.style.color = '';
+            }
+        }
+
+        function subscribe() {
+            const input = document.getElementById('emailInput');
+            if (input.value && input.value.includes('@')) {
+                alert(`✅ Terima kasih! Email ${input.value} berhasil didaftarkan. Cek inbox kamu untuk kode diskon 10%!`);
+                input.value = '';
+            } else {
+                alert('⚠️ Masukkan alamat email yang valid.');
+            }
+        }
+    </script>
+
+</body>
+</html>
